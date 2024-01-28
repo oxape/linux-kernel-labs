@@ -1,5 +1,8 @@
 FROM ubuntu:20.04
 
+RUN apt-get update && \
+    apt-get install sed && \
+    sed -i 's@//.*archive.ubuntu.com@//mirrors.ustc.edu.cn@g' /etc/apt/sources.list
 RUN apt-get update
 RUN apt-get install -y software-properties-common
 RUN apt-get install -y gcc-multilib
@@ -33,6 +36,8 @@ RUN apt-get install -y lzop
 RUN apt-get install -y samba # for the new make console command
 
 RUN apt-get -y clean
+
+RUN apt-get install -y net-tools kmod 
 
 RUN rm -rf /var/lib/apt/lists/*
 
